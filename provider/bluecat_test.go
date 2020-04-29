@@ -41,7 +41,7 @@ func createMockBluecatCNAME(alias, target string) BluecatCNAMERecord {
 	}
 }
 
-func newBluecatProvider(domainFilter DomainFilter, zoneIDFilter ZoneIDFilter, dryRun bool, client GatewayClient) *BluecatProvider {
+func newBluecatProvider(domainFilter endpoint.DomainFilter, zoneIDFilter ZoneIDFilter, dryRun bool, client GatewayClient) *BluecatProvider {
 	return &BluecatProvider{
 		domainFilter: domainFilter,
 		zoneIdFilter: zoneIDFilter,
@@ -66,7 +66,7 @@ func TestBluecatRecords(t *testing.T) {
 	}
 
 	provider := newBluecatProvider(
-		NewDomainFilter([]string{"example.com"}),
+		endpoint.NewDomainFilter([]string{"example.com"}),
 		NewZoneIDFilter([]string{""}), true, client)
 	actual, err := provider.Records(context.Background())
 
